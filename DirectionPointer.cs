@@ -12,6 +12,7 @@ public class DirectionPointer : MonoBehaviour
         float minRotation = _fullRotation;
         float maxRotation = _fullRotation * 3;
         float rotation = Random.Range(minRotation, maxRotation);
+
         _tween = transform.DORotate(Vector3.up * rotation, _spinningTime, RotateMode.LocalAxisAdd).SetEase(Ease.InOutQuad);
         _tween.SetLoops(-1, LoopType.Yoyo);
     }
