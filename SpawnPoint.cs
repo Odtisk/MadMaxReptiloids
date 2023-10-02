@@ -4,7 +4,7 @@ public class SpawnPoint : MonoBehaviour
 {
     private DirectionPointer _directionPointer;
 
-    private void Start()
+    private void Awake()
     {
         _directionPointer = GetComponentInChildren<DirectionPointer>();
     }

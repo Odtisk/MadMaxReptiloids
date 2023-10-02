@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class Spawner : MonoBehaviour
 {
-    [SerializeField] private GameObject _gameObject;
+    [SerializeField] private Enemy _enemy;
     [SerializeField] private SpawnPoint[] _spawnPoints;
     [SerializeField] private float _cooldown = 2;
     [SerializeField] private bool _shouldSpawn = true;
@@ -27,7 +27,7 @@ public class Spawner : MonoBehaviour
 
     private void Spawn(SpawnPoint spawnPoint)
     {
-        GameObject spawned = Instantiate(_gameObject);
+        GameObject spawned = Instantiate(_enemy.gameObject);
         spawned.transform.SetPositionAndRotation(spawnPoint.GetPosition(), spawnPoint.GetRotation());
     }
 
