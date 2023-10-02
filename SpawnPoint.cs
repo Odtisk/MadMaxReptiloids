@@ -13,4 +13,9 @@ public class SpawnPoint : MonoBehaviour
     {
         return _directionPointer.transform.rotation;
     }
+
+    public Vector3 GetPosition()
+    {
+        return transform.position + transform.up;
+    }
 }

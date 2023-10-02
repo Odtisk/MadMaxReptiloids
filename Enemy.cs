@@ -8,6 +8,7 @@ public class Enemy : MonoBehaviour
 
     private Rigidbody _rigidbody;
     private Animator _animator;
+    private readonly int Speed = Animator.StringToHash(nameof(Speed));
 
     private void Awake()
     {
@@ -17,7 +18,7 @@ public class Enemy : MonoBehaviour
 
     private void Update()
     {
-        _animator.SetFloat("Speed", _speed);
+        _animator.SetFloat(Speed, _speed);
         _rigidbody.AddForce(transform.forward * _speed);
     }
 }

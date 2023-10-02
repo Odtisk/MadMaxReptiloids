@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class Spawner : MonoBehaviour
@@ -5,26 +6,29 @@ public class Spawner : MonoBehaviour
     [SerializeField] private GameObject _gameObject;
     [SerializeField] private SpawnPoint[] _spawnPoints;
     [SerializeField] private float _cooldown = 2;
+    [SerializeField] private bool _shouldSpawn = true;
 
-    private float _runningTime = 0;
-
-    private void Update()
+    private void Start()
     {
-        _runningTime += Time.deltaTime;
+        StartCoroutine(Work());
+    }
 
-        if (_runningTime > _cooldown)
+    private IEnumerator Work()
+    {
+        var waitingTime = new WaitForSeconds(_cooldown);
+
+        while (_shouldSpawn)
         {
-            _runningTime = 0;
             var spawnPoint = GetRandomSpawnPoint();
             Spawn(spawnPoint);
+            yield return waitingTime;
         }
     }
 
     private void Spawn(SpawnPoint spawnPoint)
     {
         GameObject spawned = Instantiate(_gameObject);
-        spawned.transform.position = spawnPoint.transform.position + transform.up;
-        spawned.transform.rotation = spawnPoint.GetRotation();
+        spawned.transform.SetPositionAndRotation(spawnPoint.GetPosition(), spawnPoint.GetRotation());
     }
 
     private SpawnPoint GetRandomSpawnPoint()
